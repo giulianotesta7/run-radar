@@ -1,0 +1,12 @@
+[project]
+name = "eventos-ciclismo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dotenv>=0.9.9",
+    "openai>=2.16.0",
+    "pydantic>=2.12.5",
+    "requests>=2.32.5",
+]

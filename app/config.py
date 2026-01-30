@@ -11,7 +11,9 @@ sender_name = os.getenv('SENDER_NAME')
 sender_email = os.getenv('SENDER_EMAIL')
 recipient_name = os.getenv('RECIPIENT_NAME')
 recipient_email = os.getenv('RECIPIENT_EMAIL')
-language = os.getenv('LANGUAGE', 'Spanish')
+email_provieder = os.getenv('EMAIL_PROVIDER')
+gmail_email = os.getenv('GMAIL_EMAIL')
+gmail_app_password = os.getenv('GMAIL_APP_PASSWORD')
 
 if not openai_api_key:
     raise ValueError("OPENAI_API_KEY is not set in environment variables.")
@@ -33,3 +35,10 @@ if not sender_email:
 
 if not recipient_email:
     raise ValueError("RECIPIENT_EMAIL is not set in environment variables.")
+
+if email_provieder == "gmail":
+    if not gmail_email:
+        raise ValueError("GMAIL_EMAIL is not set in environment variables for Gmail provider.")
+    if not gmail_app_password:
+        raise ValueError("GMAIL_APP_PASSWORD is not set in environment variables for Gmail provider.")
+

@@ -1,5 +1,5 @@
 from agents import Agent
-from config import country, how_many_searches, language
+from config import country, how_many_searches
 from models import WebSearchPlan
 from tools import web_search, send_email
 
@@ -22,13 +22,15 @@ Output {how_many_searches} search terms focused on finding specific events, date
 EMAIL_WRITER_AGENT_INSTRUCTIONS = f"You are an agent working for RunRadar, \
 a company that provides compilations of Sport Running coming events. \
 You write professional, engaging cold emails. \
-You MUST write the email in {language}. \
+You MUST write the email in the primary language of {country} \
+(e.g., United States → English, Argentina → Spanish, Brazil → Portuguese). \
 NEVER use placeholder text like [Your Name]. \
-Always sign off simply with 'Regards, RunRadar' (or equivalent greeting in {language})."
+Always sign off simply with 'Regards, RunRadar' (or equivalent greeting in the country's language)."
 
 SUBJECT_AGENT_INSTRUCTIONS = f"You can write a subject for a sport running events compilation email. \
 You are given a message and you need to write a subject for that email. \
-You MUST write the subject in {language}."
+You MUST write the subject in the primary language of {country} \
+(e.g., United States → English, Argentina → Spanish, Brazil → Portuguese)."
 
 HTML_CONVERTER_AGENT_INSTRUCTIONS = "You can convert a text email body to an HTML email body. \
 You are given a text email body which might have some markdown \

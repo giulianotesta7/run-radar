@@ -1,12 +1,14 @@
 [project]
-name = "eventos-ciclismo"
+name = "Run-Radar"
 version = "0.1.0"
-description = "Add your description here"
+description = "AI-powered multi-agent application that discovers upcoming running/cycling events in a specified country and delivers curated event newsletters via email."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "dotenv>=0.9.9",
     "openai>=2.16.0",
+    "openai-agents>=0.7.0",
     "pydantic>=2.12.5",
     "requests>=2.32.5",
+    "resend>=2.21.0",
 ]

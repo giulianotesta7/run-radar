@@ -3,12 +3,11 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from agents import Runner, trace
-from app_agents import search_plan_agent, search_agent, email_manager
-from models import WebSearchPlan
+from app_agents import search_manager_agent
 
 
-def get_next_months(count: int = 2) -> str:
-    """Get the next N months as a formatted string."""
+def get_next_months(count: int) -> str:
+    """Get the next <count> months as a formatted string."""
     today = datetime.now()
     months = []
     for i in range(1, count + 1):
@@ -21,33 +20,19 @@ search_period = get_next_months(2)
 
 
 async def main():
+    """Orchestrate the workflow via search_manager_agent with handoff to email_manager_agent."""
     with trace("runradar_workflow"):
-        # search plan
-        plan_result = await Runner.run(
-            search_plan_agent,
-            f"Find running events for {search_period}"
+        print("[LOG] Starting workflow...")
+        print(f"[LOG] Running search_manager_agent for: {search_period}")
+
+        result = await Runner.run(
+            search_manager_agent,
+            f"Find running events for {search_period}",
+            max_turns=30,
         )
-        search_plan: WebSearchPlan = plan_result.final_output
-        print(f"Generated {len(search_plan.searches)} search queries")
 
-        # execute search
-        all_results = []
-        for item in search_plan.searches:
-            print(f"Searching: {item.query}")
-            search_result = await Runner.run(search_agent, item.query)
-            all_results.append(search_result.final_output)
-
-        # compile results and send email
-        compiled_events = "\n\n".join(all_results)
-        email_prompt = f"""
-        Here are the running events found for {search_period}:
-
-        {compiled_events}
-
-        Please create and send a professional email summarizing these events.
-        """
-        email_result = await Runner.run(email_manager, email_prompt, max_turns=20)
-        print(f"Email workflow completed: {email_result.final_output}")
+        print(f"[LOG] Workflow completed: {result.final_output}")
+        print("[LOG] Workflow finished.")
 
 
 if __name__ == "__main__":

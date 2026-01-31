@@ -3,6 +3,7 @@ import os
 load_dotenv(override=True)
 
 openai_api_key = os.getenv('OPENAI_API_KEY')
+openai_model = os.getenv('OPENAI_MODEL', 'gpt-4o-mini')
 brave_api_key = os.getenv('BRAVE_API_KEY')
 resend_api_key = os.getenv('RESEND_API_KEY')
 how_many_searches = os.getenv('HOW_MANY_SEARCHES')

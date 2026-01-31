@@ -40,6 +40,7 @@ Create a `.env` file (see `.env.example`).
 
 ~~~env
 OPENAI_API_KEY=...
+OPENAI_MODEL=gpt-4o-mini
 BRAVE_API_KEY=...
 COUNTRY=Argentina
 HOW_MANY_SEARCHES=6
@@ -113,6 +114,7 @@ main()
 | Variable | Description | Required |
 |----------|-------------|----------|
 | `OPENAI_API_KEY` | OpenAI API key | Yes |
+| `OPENAI_MODEL` | OpenAI model (default: `gpt-4o-mini`) | No |
 | `BRAVE_API_KEY` | Brave Search API key | Yes |
 | `COUNTRY` | Target country for events | Yes |
 | `HOW_MANY_SEARCHES` | Number of search queries | Yes |

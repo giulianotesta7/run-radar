@@ -79,18 +79,6 @@ RunRadar will:
 
 ## Architecture (Agents)
 
-```mermaid
-flowchart LR
-  A[Search Plan Agent] --> B[Search Agent]
-  B --> C[Search Manager Agent\n(aggregate + dedupe)]
-  C --> D[Email Writer Agent]
-  D --> E[Subject Writer Agent]
-  D --> F[HTML Converter Agent]
-  E --> G[Email Validator Agent]
-  F --> G
-  G --> H[send_email()]
-```
-
 ### Search
 - **Search Plan Agent**: generates the best search queries for the target country
 - **Search Agent**: executes searches (Brave Search API)
@@ -102,6 +90,21 @@ flowchart LR
 - **HTML Converter Agent**: converts content to email-safe HTML (tables)
 - **Email Validator Agent**: validates content before sending
 - **Email Manager Agent**: orchestrates email composition + delivery
+
+### Flow
+
+~~~text
+main()
+  └→ Search Manager Agent
+      ├→ Search Plan Agent
+      ├→ Search Agent
+      └→ handoff → Email Manager Agent
+          ├→ Email Writer Agent
+          ├→ Subject Writer Agent
+          ├→ HTML Converter Agent
+          ├→ Email Validator Agent
+          └→ send_email()
+~~~
 
 ---
 

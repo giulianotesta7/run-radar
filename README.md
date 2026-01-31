@@ -2,7 +2,7 @@
 
 AI-powered multi-agent app that discovers upcoming running/cycling events in a specified country and sends a curated newsletter by email.
 
-
+![RunRadar newsletter preview](docs/newsletter-preview.png)
 ---
 
 ## What it does
@@ -23,7 +23,7 @@ RunRadar orchestrates multiple agents to:
 
 ~~~bash
 git clone <repository-url>
-cd run-radar
+cd run-radar/app
 uv sync
 ~~~
 
@@ -57,6 +57,15 @@ SENDER_NAME=RunRadar
 
 ~~~bash
 uv run python main.py
+~~~
+
+~~~text
+[LOG] Starting workflow...
+[LOG] Running search_manager_agent for: February 2026 and March 2026
+[TOOL] web_search called with query: ...
+[TOOL] send_email called with subject: ...
+[LOG] Workflow completed: ... successfully sent!
+[LOG] Workflow finished.
 ~~~
 
 RunRadar will:

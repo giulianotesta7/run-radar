@@ -1,6 +1,7 @@
 from agents import Agent
 from models import WebSearchPlan, SearchResult, EmailSubject, EmailBody, EmailHtmlContent, EmailValidationResult
 from tools import web_search, send_email
+from config import openai_model
 from instructions import (
     SEARCH_AGENT_INSTRUCTIONS,
     SEARCH_PLAN_AGENT_INSTRUCTIONS,
@@ -15,14 +16,14 @@ from instructions import (
 
 search_plan_agent = Agent(
     name="Search Plan Agent",
-    model="gpt-4o-mini",
+    model=openai_model,
     instructions=SEARCH_PLAN_AGENT_INSTRUCTIONS,
     output_type=WebSearchPlan,
 )
 
 search_agent = Agent(
     name="Search Agent",
-    model="gpt-4o-mini",
+    model=openai_model,
     instructions=SEARCH_AGENT_INSTRUCTIONS,
     tools=[web_search],
     output_type=SearchResult,
@@ -34,28 +35,28 @@ search_tool = search_agent.as_tool(tool_name="web_searcher",tool_description="Se
 email_writer = Agent(
     name="Email writer",
     instructions=EMAIL_WRITER_AGENT_INSTRUCTIONS,
-    model="gpt-4o-mini",
+    model=openai_model,
     output_type=EmailBody,
 )
 
 subject_writer = Agent(
     name="Subject writer",
     instructions=SUBJECT_AGENT_INSTRUCTIONS,
-    model="gpt-4o-mini",
+    model=openai_model,
     output_type=EmailSubject,
 )
 
 html_converter = Agent(
     name="HTML email body converter",
     instructions=HTML_CONVERTER_AGENT_INSTRUCTIONS,
-    model="gpt-4o-mini",
+    model=openai_model,
     output_type=EmailHtmlContent,
 )
 
 validator_agent = Agent(
     name="Email Validator",
     instructions=EMAIL_VALIDATOR_INSTRUCTIONS,
-    model="gpt-4o-mini",
+    model=openai_model,
     output_type=EmailValidationResult,
 )
 
@@ -81,7 +82,7 @@ email_manager_tools = [email_tool, subject_tool, html_converter_tool, validator_
 email_manager_agent = Agent(
     name="Email Manager",
     instructions=MANAGER_INSTRUCTIONS,
-    model="gpt-4o-mini",
+    model=openai_model,
     tools=email_manager_tools,
 )
 
@@ -89,7 +90,7 @@ search_manager_tools = [search_plan_tools, search_tool]
 
 search_manager_agent = Agent(
     name="Search Manager Agent",
-    model="gpt-4o-mini",
+    model=openai_model,
     instructions=SEARCH_MANAGER_INSTRUCTIONS,
     tools=search_manager_tools,
     handoffs=[email_manager_agent],

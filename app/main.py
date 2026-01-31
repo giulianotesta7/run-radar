@@ -3,7 +3,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from agents import Runner, trace
-from app_agents import search_manager_agent
+from agents_config import search_manager_agent
 
 
 def get_next_months(count: int) -> str:

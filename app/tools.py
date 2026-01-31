@@ -29,6 +29,7 @@ def web_search(query: str) -> str:
     Returns:
         A formatted string with search results including titles, URLs, and descriptions.
     """
+    print(f"[TOOL] web_search called with query: {query}")
     headers = {
         "Accept": "application/json",
         "Accept-Encoding": "gzip",
@@ -109,6 +110,7 @@ def send_email(subject: str, html_content: str) -> str:
     Returns:
         A string with the result or error message.
     """
+    print(f"[TOOL] send_email called with subject: {subject}")
     try:
         if email_provider == "gmail":
             return _send_with_gmail(subject, html_content)

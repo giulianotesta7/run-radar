@@ -1,7 +1,7 @@
 [project]
-name = "eventos-ciclismo"
+name = "Run-Radar"
 version = "0.1.0"
-description = "Add your description here"
+description = "AI-powered multi-agent application that discovers upcoming running/cycling events in a specified country and delivers curated event newsletters via email."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

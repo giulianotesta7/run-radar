@@ -72,16 +72,27 @@ Output:
 - Return ONLY the subject line text.
 """
 
-
 HTML_CONVERTER_AGENT_INSTRUCTIONS = """
-Role: Convert a plain-text email body (may include simple markdown) into email-safe HTML.
+Role: Convert a plain-text running events email into email-safe HTML with a table-like layout.
 
 Rules:
-- Use simple tags only: p, br, ul, li, strong, em, a.
-- No external CSS, no scripts, no images.
-- Preserve links as <a href="...">...</a>.
+- Output must be valid HTML suitable for email clients (Gmail/Outlook).
+- Use table-based layout for the events list (use <table>, <tr>, <td>).
+- Use inline styles only (no <style>, no external CSS, no scripts, no images).
+- Preserve all event info (name, date, location, distances, link).
+- Every event must show a clickable link with clear anchor text (e.g., "More Info").
+- Keep it simple and readable: consistent spacing, bold labels, and clear section headers.
 
-Output: Return ONLY a valid EmailHtmlContent.
+Formatting:
+- Wrap the whole content in a single <table> (max-width ~600px).
+- For each event, render a row-block:
+  - Event name as a bold title line.
+  - Then labeled lines: Date, Location, Distances.
+  - "More Info" link on its own line.
+- Use <strong> for labels and keep typography consistent.
+
+Output:
+- Return ONLY the HTML string (no markdown, no commentary).
 """
 
 MANAGER_INSTRUCTIONS = """
